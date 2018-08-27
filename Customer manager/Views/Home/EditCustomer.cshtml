@@ -1,17 +1,17 @@
 ﻿@model Customer_manager.Models.CustomerModel
 
 @{
-    ViewBag.Title = "Add customer";
+    ViewBag.Title = "Edit Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 @Html.AntiForgeryToken()
 
 <div class="card">
     <div class="card-header bg-dark" style="margin-top:20px;">
-        <h2 class="text-info">Add new customer</h2>
+        <h2 class="text-info">Edit customer</h2>
     </div>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    @using (Html.BeginForm("EditCustomer", "Home", FormMethod.Post))
     {
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="card-body col-6 centered ">
@@ -78,29 +78,20 @@
                     @Html.EditorFor(x => x.Address.FlatNumber)
                 </div>
             </div>
-            <input type="submit" class="btn btn-success centered" style="margin-top:15px;" value="Add customer">
-            @if (ViewBag.AlertSuccess != null && ViewBag.AlertSuccess == true)
-            {
-                <div class="alert alert-success" role="alert"  style="margin-top:20px">
-                    <h4 class="alert-heading">Success!</h4>
-                    <p>You succesfully added new customer.</p>
-                </div>
-            }
-            else if (ViewBag.AlertSuccess != null && ViewBag.AlertSuccess == false)
+            <input type="submit" class="btn btn-success centered" style="margin-top:15px;" value="Edit customer">
+            @if (ViewBag.AlertSuccess != null && ViewBag.AlertSuccess == false)
             {
                 <div class="alert alert-danger" role="alert" style="margin-top:20px">
                     <h4 class="alert-heading">Error!</h4>
-                    <p>You failed to add new customer.</p>
+                    <p>You failed to edit customer data.</p>
                 </div>
             }
-
+            
         </div>
     }
-
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('#singleSelectDropDown').chosen();
         });
     </script>
-

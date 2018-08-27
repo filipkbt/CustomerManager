@@ -35,9 +35,9 @@ namespace Customer_manager.Infrastructure
                     db.Customers.Add(customer);
                     db.SaveChanges();
                 }
-                    return true;
+                return true;
             }
-            catch(Exception )
+            catch (Exception)
             {
                 return false;
             }
@@ -51,7 +51,7 @@ namespace Customer_manager.Infrastructure
                 using (DbContextModel db = new DbContextModel())
                 {
                     var customerToRemove = db.Customers.Include("Address").FirstOrDefault(x => x.Id == id);
-                    if(customerToRemove != null)
+                    if (customerToRemove != null)
                     {
                         db.Customers.Remove(customerToRemove);
                         db.SaveChanges();
@@ -61,10 +61,40 @@ namespace Customer_manager.Infrastructure
 
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
+        }
+
+        [HttpPost]
+        public static bool EditCustomer(CustomerModel customer)
+        {
+            try
+            {
+                using (DbContextModel db = new DbContextModel())
+                {
+                    CustomerModel customerToEdit = db.Customers.Include("Address").FirstOrDefault(x => x.Id == customer.Id);
+                    customerToEdit.Name = customer.Name;
+                    customerToEdit.Surname = customer.Surname;
+                    customerToEdit.TelephoneNumber = customer.TelephoneNumber;
+                    customerToEdit.Address.Country = customer.Address.Country;
+                    customerToEdit.Address.City = customer.Address.City;
+                    customerToEdit.Address.PostalCode = customer.Address.PostalCode;
+                    customerToEdit.Address.Street = customer.Address.Street;
+                    customerToEdit.Address.HouseNumber = customer.Address.HouseNumber;
+                    customerToEdit.Address.FlatNumber = customer.Address.FlatNumber;
+                    db.Entry(customerToEdit).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
     }
 }
