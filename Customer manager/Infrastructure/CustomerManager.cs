@@ -17,7 +17,12 @@ namespace Customer_manager.Infrastructure
                 try
                 {
                     var customers = db.Customers.Include("Address").ToList();
-                    return (customers);
+                    if(customers == null)
+                    {
+                        List<CustomerModel> customersEmptyList = new List<CustomerModel>();
+                        return customersEmptyList;
+                    }
+                    return customers;
                 }
                 catch (Exception ex)
                 {

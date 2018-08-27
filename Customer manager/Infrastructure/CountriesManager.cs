@@ -9,13 +9,13 @@ namespace Customer_manager.Infrastructure
 {
     public static class CountriesManager
     {
-        private const string _countriesFilePath = @"/Content/Countries.txt";
 
         public static IEnumerable<string> LoadAllCountriesFromFile()
         {
             try
             {
-                var _countriesProjectFilePath = HttpContext.Current.Server.MapPath(_countriesFilePath);
+                string path = @"/Content/Countries.txt";
+                var _countriesProjectFilePath = HttpContext.Current.Server.MapPath(path);
                 using (StreamReader sr = new StreamReader(_countriesProjectFilePath, Encoding.Default, true))
                 {
                     string line;
