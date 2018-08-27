@@ -1,5 +1,91 @@
-﻿@{
+﻿@model Customer_manager.Models.CustomerModel
+
+@{
     ViewBag.Title = "Add customer";
 }
 
+
 @Html.AntiForgeryToken()
+
+<div class="card">
+    <div class="card-header bg-dark" style="margin-top:20px;">
+        <h2 class="text-info">Add new customer</h2>
+    </div>
+    @using (Html.BeginForm("Index","Home", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="card-body col-6 centered ">
+            <div class="alert alert-warning"><h3>Fields with <text style="color:red">*</text> are necessary</h3></div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>Name <text style="color:red">*</text></h3>
+                        @Html.EditorFor(x => x.Name)
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>Surname <text style="color:red">*</text></h3>
+                        @Html.EditorFor(x => x.Surname)
+                        @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>Telephone number <text style="color:red">*</text></h3>
+                        @Html.EditorFor(x => x.TelephoneNumber)
+                        @Html.ValidationMessageFor(model => model.TelephoneNumber, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>Country <text style="color:red">*</text></h3>
+                        @Html.DropDownListFor(x => x.Address.Country, @TempData["Countries"] as SelectList, new { @class = "chzn-select", id = "singleSelectDropDown" })
+                        @Html.ValidationMessageFor(model => model.Address.Country, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>City <text style="color:red">*</text></h3>
+                        @Html.EditorFor(x => x.Address.City)
+                        @Html.ValidationMessageFor(model => model.Address.City, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>Postal code <text style="color:red">*</text></h3>
+                        @Html.EditorFor(x => x.Address.PostalCode)
+                        @Html.ValidationMessageFor(model => model.Address.PostalCode, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>Street <text style="color:red">*</text></h3>
+                        @Html.EditorFor(x => x.Address.Street)
+                        @Html.ValidationMessageFor(model => model.Address.Street, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>House number <text style="color:red">*</text></h3>
+                        @Html.EditorFor(x => x.Address.HouseNumber)
+                        @Html.ValidationMessageFor(model => model.Address.HouseNumber, "", new { @class = "text-danger row justify-content-center" })
+                    </div>
+                </div>
+                <div class="form-row col-8 centered">
+                    <div class="col">
+                        <h3>Flat number</h3>
+                        @Html.EditorFor(x => x.Address.FlatNumber)
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success centered" style="margin-top:15px;" value="Add customer">
+            </div>
+    }
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#singleSelectDropDown').chosen();
+        });
+    </script>
+

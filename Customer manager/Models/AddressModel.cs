@@ -13,15 +13,15 @@ namespace Customer_manager.Models
         public int Id { get; set; }
 
         public virtual CustomerModel CustomerId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string Country { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string City { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string PostalCode { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string Street { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string HouseNumber { get; set; }
 
         public int? FlatNumber { get; set; }

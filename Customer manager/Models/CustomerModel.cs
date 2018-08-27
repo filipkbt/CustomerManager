@@ -11,13 +11,14 @@ namespace Customer_manager.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string Surname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
+        [Phone]
         public string TelephoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public virtual AddressModel Address { get; set; }
     }
 }
